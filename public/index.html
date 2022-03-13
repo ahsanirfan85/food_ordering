@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- app.js -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+</head>
+<body>
+  <div id="order_summary">
+    <div id="order_total">
+      Order Total: 0
+      <br>
+      <br>
+    </div>
+  </div>
+  <form id="order-form" method="POST" action="/api/orders">
+    <label for="customerName">Name: </label>
+    <input id="customerName"></input>
+    <br>
+    <br>
+    <label for="phone">Phone: </label>
+    <input id="phone"></input>
+    <br>
+    <br>
+    <label for="street">Street: </label>
+    <input id="street"></input>
+    <br>
+    <br>
+    <label for="city">City: </label>
+    <input id="city"></input>
+    <br>
+    <br>
+    <label for="postal_code">Postal Code: </label>
+    <input id="postal_code"></input>
+    <br>
+    <br>
+    <label for="province">Province: </label>
+    <input id="province"></input>
+    <br>
+    <br>
+    <label for="creditCard">Credit Card Number: </label>
+    <input id="creditCard"></input>
+    <br>
+    <br>
+    <label for="creditCardExpiry">Credit Card Expiry: </label>
+    <input id="creditCardExpiry"></input>
+    <br>
+    <br>
+    <label for="creditCardCvv">CVV: </label>
+    <input id="creditCardCvv"></input>
+    <br>
+    <br>
+    <button type="submit">Place Order!</button>
+  </form>
+</body>
+</html>
