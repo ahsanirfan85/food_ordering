@@ -1,0 +1,10 @@
+.hero-container {
+  height: 100vh;
+  position: relative;
+  background: url("/public/images/pizza.jpeg") no-repeat top center;
+  background-size: 100%;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: -1;
+}
