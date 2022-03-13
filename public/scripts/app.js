@@ -82,15 +82,38 @@ $(document).ready(function(){
         orderObject[$(child).attr('id')] = $(`#${$(child).attr('id')}`).val();
       }
     };
+    let orderDetails = $('#order_summary').children();
+    let orderDetailsObject = {
+      order_details: []
+    };
+    for (let i = 1; i < orderDetails.length; i++) {
+      // console.log(orderDetails[i]);
+      let $item = orderDetails[i];
+      // console.log($($item).children());
+      let item = {};
+      item.name = $($item).children()[0].innerText;
+      item.quantity = $($item).children()[1].innerText;
+      item.price = $($item).children()[2].innerText;
+      orderDetailsObject.order_details.push(item);
+    };
     $.post("/api/orders", orderObject, (data) => {
       const orderDetails = data.order_details[0];
-      console.log(orderDetails);
       $('#order-form').remove();
       $('body').append(`
         <div>${orderDetails.name}! Your order has been sent!</div>
         <br>
         <button id="order-again">Order Again</button>
       `);
+    });
+    $.post("/api/order_items", orderDetailsObject, (data) => {
+      console.log(data);
+      // const orderDetails = data.order_details[0];
+      // $('#order-form').remove();
+      // $('body').append(`
+      //   <div>${orderDetails.name}! Your order has been sent!</div>
+      //   <br>
+      //   <button id="order-again">Order Again</button>
+      // `);
     });
   });
   $(document).on("click", "#order-again", function(event) {
