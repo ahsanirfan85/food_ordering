@@ -2,19 +2,29 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <title>Food Ordering App</title>
+  <!-- Importing external stylesheets and scripts -->
+  <% include ./partials/_head %>
 </head>
 
 <body>
-  <h1 >Have fun! 🥔</h1>
-</body>
+  <header>
+    <% include partials/_header %>
+  </header>
 
+  <main>
+    <h1 >Hero Image</h1>
+  </main>
+
+  <section>
+    <h2>Menu Items</h2>
+  </section>
+
+  <section>
+    <h2>Bottom Selection - optional</h2>
+  </section>
+</body>
+<footer>
+  <% include ./partials/_footer %>
+</footer>
 </html>
