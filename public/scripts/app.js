@@ -48,7 +48,7 @@ $(document).ready(function () {
     totalCost += $price * Number($(this).parent().children()[6].innerText);
     $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
     $("#order_summary").append(
-      `<div><p>where am i</p><div>${item[0]}</div><div>${item[1]}</div><div>${item[2]}</div><button class='remove'>Remove Item</button><br></div>`
+      `<div><div>${item[0]}</div><div>${item[1]}</div><div>${item[2]}</div><button class='remove'>Remove Item</button><br></div>`
     );
     $(`#${id}`).html("0");
   });
