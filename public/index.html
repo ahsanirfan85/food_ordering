@@ -50,7 +50,7 @@
 <div class="row">
   <div class="col-75">
     <div class="container">
-      <form action="/action_page.php">
+      <form id="order-form" method="POST" action="/api/orders">
 
         <div class="row">
           <div class="col-50">
@@ -111,6 +111,17 @@
       </form>
     </div>
   </div>
+
+<!-- TODO: add a box for total order -->
+  <section class="menu_items">
+    <div id="order_summary">
+      <div id="order_total">
+        Order Total: 0
+        <br>
+        <br>
+      </div>
+    </div>
+  </section>
 
   <!-- // Pseudo code Total in cart -->
   <!-- <div class="col-25">
