@@ -67,15 +67,46 @@ li a:hover {
   height: 200px;
 }
 // styles from jQuery
-#menu-item-name {
-  font-size: 2.5rem;
-}
-
 .menu-wrapper {
   display: flex;
-  width: 100vw;
+  flex-direction: row;
+  border: 1px solid #000;
+  width: 200px;
+}
+
+.name {
+  font-size: 1.5rem;
+}
+
+.description {
+  font-size: 1rem;
+}
+
+.price {
+  font-size: 1.5rem;
 }
 
 .click_me {
   font-size: 1.5rem;
+}
+
+.menu-buttons {
+  border: 1px solid #000;
+  width: 200px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mr-3 {
+  margin-right: 15px;
+}
+
+.align-items-center {
+  align-items: center;
 }
