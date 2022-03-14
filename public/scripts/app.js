@@ -43,12 +43,13 @@ $(document).ready(function(){
     let item = [];
     let $quantityObject = $(this).parent().children()[6];
     let id = $($quantityObject).attr('id');
+    item.push(id);
     item.push($(this).parent().children()[0].innerText);
     item.push($(this).parent().children()[6].innerText);
     item.push($(this).parent().children()[2].innerText);
     totalCost += $price * Number($(this).parent().children()[6].innerText);
     $('#order_total').html(`Order Total: ${totalCost}<br><br>`);
-    $('#order_summary').append(`<div><div>${item[0]}</div><div>${item[1]}</div><div>${item[2]}</div><button class='remove'>Remove Item</button><br></div>`);
+    $('#order_summary').append(`<div><div>${item[0]}</div><div>${item[1]}</div><div>${item[2]}</div><div>${item[3]}</div><button class='remove'>Remove Item</button><br></div>`);
     $(`#${id}`).html('0');
   });
   // What happens when the user clicks on the Remove button
@@ -76,44 +77,42 @@ $(document).ready(function(){
   });
   $("#order-form").submit(function(event) {
     event.preventDefault();
-    let orderObject = {};
+    let orderObject = {
+      customerDetails:{},
+      orderDetails:[]
+    };
     for (const child of $(this).children()) {
       if ($(child).attr('id')) {
-        orderObject[$(child).attr('id')] = $(`#${$(child).attr('id')}`).val();
+        const $idHolder = $(child).attr('id');
+        orderObject.customerDetails[$idHolder] = $(child).val()
       }
     };
-    let orderDetails = $('#order_summary').children();
-    let orderDetailsObject = {
-      order_details: []
-    };
-    for (let i = 1; i < orderDetails.length; i++) {
-      // console.log(orderDetails[i]);
-      let $item = orderDetails[i];
-      // console.log($($item).children());
+    console.log(orderObject.customerDetails);
+    console.log($('#order_summary').children()[1]);
+    for (let i = 1; i < $('#order_summary').children().length; i++) {
+      let $item = $('#order_summary').children()[i];
       let item = {};
-      item.name = $($item).children()[0].innerText;
-      item.quantity = $($item).children()[1].innerText;
-      item.price = $($item).children()[2].innerText;
-      orderDetailsObject.order_details.push(item);
+      item.order_id = 0;
+      item.menu_id = $($item).children()[0].innerText;
+      item.quantity = $($item).children()[2].innerText;
+      orderObject.orderDetails.push(item);
     };
     $.post("/api/orders", orderObject, (data) => {
-      const orderDetails = data.order_details[0];
-      $('#order-form').remove();
-      $('body').append(`
-        <div>${orderDetails.name}! Your order has been sent!</div>
-        <br>
-        <button id="order-again">Order Again</button>
-      `);
-    });
-    $.post("/api/order_items", orderDetailsObject, (data) => {
       console.log(data);
-      // const orderDetails = data.order_details[0];
-      // $('#order-form').remove();
-      // $('body').append(`
-      //   <div>${orderDetails.name}! Your order has been sent!</div>
-      //   <br>
-      //   <button id="order-again">Order Again</button>
-      // `);
+      console.log(data.order_details.id);
+      console.log(orderObject.orderDetails);
+      for (const each of orderObject.orderDetails) {
+        each.order_id = data.order_details.id;
+        $.post("/api/order_items", each, (data) => {
+          console.log(data);
+        });
+      }
+    $('body').empty();
+    $('body').append(`
+    <div>${data.order_details.name}! Your order has been sent!</div>
+    <br>
+    <button id="order-again">Order Again</button>
+    `);
     });
   });
   $(document).on("click", "#order-again", function(event) {
@@ -123,9 +122,3 @@ $(document).ready(function(){
     });
   });
 });
-
-/* NOTES
-
-I think I need a global array that is available to all functions should they need it. This array will contain objects. Each object will represent each item on the menu. Data from this object will be available to all functions. All functions will be able to update quantities in these objects as well. So when you first make the ajax request, you should put the returned data into a global array of object. THEN only should you manipulate it for rendering to the page.
-
-*/

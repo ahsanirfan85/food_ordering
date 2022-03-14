@@ -13,23 +13,22 @@ const router  = express.Router();
 module.exports = (db) => {
   router.post("/", (req, res) => {
     const order = req.body;
-    const orderDetails = order.order_details;
-    for (const eachItem of orderDetails) {
-      console.log(eachItem);
-    //   db.query(`
-    //   INSERT INTO orders_menu_bridge (name) VALUES ('Fried chicken') RETURNING *;
-    // `)
-    //   .then(data => {
-    //     const order_details = data.rows;
-    //     console.log(order_details);
-    //     res.json({  order_details  });
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message  });
-    //   });
-    }
-  });
+    console.log(order.order_id);
+    console.log(order.menu_id);
+    console.log(order.quantity);
+      db.query(`
+      INSERT INTO orders_menu_bridge (order_id, menu_id, quantity) VALUES ($1,$2,$3) RETURNING *;
+    `, [order.order_id, order.menu_id, order.quantity])
+      .then(data => {
+        const order_details = data.rows;
+        console.log(order_details);
+        res.json({  order_details  });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message  });
+      });
+    });
   return router;
 };
