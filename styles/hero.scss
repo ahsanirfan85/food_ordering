@@ -1,14 +1,3 @@
-// .hero-container {
-//   height: 100vh;
-//   position: relative;
-//   background: url("/public/images/pizza.jpeg") no-repeat top center;
-//   background-size: 100%;
-//   position: fixed;
-//   top: 0px;
-//   width: 100wv;
-//   z-index: -1;
-// }
-
 .hero {
   /* Sizing */
   width: 100vw;
@@ -23,17 +12,33 @@
   text-align: center;
 
   /* Background styles */
-  background-image: url("https://www.onmanorama.com/content/dam/mm/en/food/features/images/2021/10/17/pizza.jpg.transform/onm-articleimage/image.jpg");
+  background-image: url("/images/pizza.jpeg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  object-fit: cover;
   background-attachment: fixed;
+  // filter: blur(2px);
+  width: 100vw;
+  height: 100vh;
+}
+
+.hero h1 {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-size: 3.5rem;
+}
+
+.hero h2 {
+  color: rgb(255, 255, 255);
+  font-weight: 100;
+  font-size: 1.5rem;
 }
 
 .hero .btn {
   /* Positioning and sizing */
   display: block;
-  width: 200px;
+  width: 300px;
 
   /* Padding and margins */
   padding: 1em;
@@ -42,11 +47,15 @@
   margin-right: auto;
 
   /* Text styles */
-  color: black;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-size: 1.5em;
 
   /* Border styles */
-  border: 3px solid black;
+  border: 3px solid rgb(255, 255, 255);
   border-radius: 20px;
+}
+
+.hero .btn:hover {
+  border-color: rgb(139, 139, 139);
 }

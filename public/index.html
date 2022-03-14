@@ -4,43 +4,41 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Ordering App</title>
-  <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!-- app.js -->
   <script type="text/javascript" src="/scripts/app.js"></script>
-
   <link rel="stylesheet" href="./styles/main.css">
-
+  
+  <title>Food Ordering App</title>
 </head>
 
 <body>
-  <!-- <nav>
-    <div class="nav-container">
-      <div class="banner-image">
-      <img src="./images/pizza.jpeg" />
-      </div>
-      <h1>Banner here</h1>
-      <button type="submit" class="navbar-btn">
-    </div>
-  </nav> -->
-
   <section class="hero">
-    <div class="hero-inner">
-      <h1>My awesome website</h1>
-      <h2>Look at this website and bask in its amazing glory!</h2>
-      <a href="https://example.com/" class="btn">Go ahead...</a>
+    <div class="">
+      <h1>Online Food Ordering System</h1>
+      <h2>Free of charge, zero commissions, unlimited online orders</h2>
+      <a href="#display-menu" class="btn">Start your order</a>
     </div>
   </section>
 
-  <div id="order_summary">
-    <div id="order_total">
-      Order Total: 0
-      <br>
-      <br>
-    </div>
-  </div>
+ <section id="display-menu">
+<div class="menu-category">
+  <ul>
+    <li><a href="#">Burgers</a></li>
+    <li><a href="#">Fries</a></li>
+    <li><a href="#">Coke</a></li>
+    <li><a href="#">Pizza</a></li>
+    <li><a href="#">Chicken Wings</a></li>
+    <li><a href="#">Fried Chicken</a></li>
+  </ul>
+</div>
+ </section>
+
+ <section class="menu-cards">
+   <h1>insert cards here</h1>
+ </section>
+
+  
+  <section id="form-area">
   <form id="order-form" method="POST" action="/api/orders">
     <label for="customerName">Name: </label>
     <input id="customerName"></input>
@@ -80,5 +78,17 @@
     <br>
     <button type="submit">Place Order!</button>
   </form>
+  </section>
+
+
+  <section class="menu_items">
+    <div id="order_summary">
+      <div id="order_total">
+        Order Total: 0
+        <br>
+        <br>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

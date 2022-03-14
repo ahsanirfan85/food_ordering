@@ -21,7 +21,7 @@ $(document).ready(function () {
 
   const renderMenu = function (input) {
     for (const menuItem of input.menu_items) {
-      $("body").prepend(createMenuItem(menuItem));
+      $("#display-menu").append(createMenuItem(menuItem));
       quantities.push(0);
     }
   };
@@ -95,7 +95,7 @@ $(document).ready(function () {
       const orderDetails = data.order_details[0];
       console.log(orderDetails);
       $("#order-form").remove();
-      $("body").append(`
+      $("body").prepend(`
         <div>${orderDetails.name}! Your order has been sent!</div>
         <br>
         <button id="order-again">Order Again</button>
