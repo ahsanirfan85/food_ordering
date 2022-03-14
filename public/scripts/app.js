@@ -95,7 +95,7 @@ $(document).ready(function () {
       const orderDetails = data.order_details[0];
       console.log(orderDetails);
       $("#order-form").remove();
-      $("body").prepend(`
+      $("body").append(`
         <div>${orderDetails.name}! Your order has been sent!</div>
         <br>
         <button id="order-again">Order Again</button>

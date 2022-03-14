@@ -8,7 +8,6 @@
 *,
 *::before,
 *::after {
-  font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
   box-sizing: inherit;
 }
 
@@ -20,7 +19,8 @@ html {
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
+  background-color: #f9f6f2;
 }
 
 // Execute this in the command line for the changes to take eeffect
