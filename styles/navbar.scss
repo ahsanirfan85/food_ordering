@@ -10,3 +10,13 @@
   position: relative;
   width: 100wv;
 }
+
+.banner-image {
+  height: 100vh;
+  position: absolute;
+  background-size: 100%;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: -1;
+}
