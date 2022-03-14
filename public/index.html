@@ -19,27 +19,35 @@
     <div class="">
       <h1>Online Food Ordering System</h1>
       <h2>Free of charge, zero commissions, unlimited online orders</h2>
-      <a href="#display-menu" class="btn">Start your order</a>
+      <a href="#menu-categories" class="btn">Start your order</a>
     </div>
   </section>
 
- <section id="display-menu">
-<div class="menu-category">
-  <ul>
-    <li><a href="#">Burgers</a></li>
-    <li><a href="#">Fries</a></li>
-    <li><a href="#">Coke</a></li>
-    <li><a href="#">Pizza</a></li>
-    <li><a href="#">Chicken Wings</a></li>
-    <li><a href="#">Fried Chicken</a></li>
-  </ul>
-</div>
+<section id="menu-categories">
+  <div class="menu-category">
+    <ul>
+      <li><a href="#">Burgers</a></li>
+      <li><a href="#">Fries</a></li>
+      <li><a href="#">Coke</a></li>
+      <li><a href="#">Pizza</a></li>
+      <li><a href="#">Chicken Wings</a></li>
+      <li><a href="#">Fried Chicken</a></li>
+    </ul>
+  </div>
+</section>
+
+ <section>
+
+  <div class="display-menu">
+    <div class="display-item">numbe1</div>
+    <div class="display-item">numbe1</div>
+    <div class="display-item">numbe1</div>
+    <div class="display-item">numbe1</div>
+  </div>
+  
  </section>
 
- <section class="menu-cards">
-   <h1>insert cards here</h1>
-  <a href="#form-area" class="btn">Ready for payment?</a>
- </section>
+ 
 
 <section id="form-area">
   <div class="order-details">
@@ -51,7 +59,7 @@
   <div class="col-75">
     <div class="container">
       <form id="order-form" method="POST" action="/api/orders">
-
+<!-- TODO: fix id's -->
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>

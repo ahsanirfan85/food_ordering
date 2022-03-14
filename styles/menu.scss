@@ -27,10 +27,28 @@ li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 16px;
+  padding: 14px;
+  width: 200px;
   text-decoration: none;
 }
 
 li a:hover {
   color: rgb(255, 230, 0);
+}
+
+.menu-selection {
+  display: flex;
+}
+
+// Style for menu items
+.display-menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.display-item {
+  flex: 1 0 21%; /* explanation below */
+  margin: 5px;
+  height: 100px;
+  background-color: blue;
 }
