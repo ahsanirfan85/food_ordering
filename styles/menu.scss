@@ -47,8 +47,12 @@ li a:hover {
 }
 
 .display-item {
-  flex: 1 0 21%; /* explanation below */
-  margin: 5px;
-  height: 100px;
-  background-color: blue;
+  flex: 1 0 10%;
+  margin: 15px 5px;
+  padding: 2px;
+}
+
+.menu-size {
+  width: 360px;
+  height: 200px;
 }
