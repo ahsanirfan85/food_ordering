@@ -3,29 +3,31 @@ $(document).ready(function () {
   const createMenuItem = function (item) {
     return `
     <div class="menu-wrapper">
-      <div>
-        <div class="name-price">
-        <div><img class="menu-size" src="${item.photo_url}" alt="image
-        "></div>
+      <div class="menu-items">
+      <img class="menu-size" src="${item.photo_url}" alt="image">
+        <div class="name-desc">
         <div class="name">${item.name}</div>
-        <div class="price">$<span>${item.price / 100}</span></div>
-        </div>
         <div class="description">${item.description}</div>
-        
-      
-      <div class="display-flex align-items-center">
-        <button class="click_me mr-3">Add to Order</button>
-        <button class="add_quantity mr-3">+</button>
+        </div>
+        <div class="name-price">
+        <div class="price">$<span>${item.price / 100}</span></div>
+        <div class="display-flex align-items-center">
+
+        <div class="btn-qty">
+        <button class="add_quantity mr-3 btn">+</button>
         <div class="mt-3 mr-3" id="${item.id}">0</div>
-        <button class="red_quantity">-</button>
+        <button class="red_quantity mr-3 btn">-</button>
+        </div>
+          <button class="click_me mr-3 btn">Add to Order</button>
+        
+          </div>
+        </div>
       </div>
-      
-      </div>  
     </div>
   </div>
 </div>
 
-      
+
       `;
   };
 
@@ -50,47 +52,47 @@ $(document).ready(function () {
   // What happens when the user clicks the Add button
   $(document).on("click", ".click_me", function (event) {
     event.preventDefault();
-    const $price = Number(
-      $(this).parent().parent().children()[2].children[0].innerText
-    );
-    let item = [];
-    let $quantityObject = $(this).parent().children()[2];
-    let id = $($quantityObject).attr("id");
-    item.push(id);
-    item.push($(this).parent().parent().children()[0].innerText);
-    item.push($(this).parent().parent().children()[1].innerText);
-    item.push($(this).parent().children()[2].innerText);
-    item.push($price);
-    totalCost +=
-      parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
-    $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
-    $("#order_summary").append(
-      `<div class="total-summary-list">
-      <div>${item[0]}</div>
-      <div>${item[1]}</div>
-      <div>${item[2]}</div>
-      <div>${item[3]}</div>
-      <div>${item[4]}</div>
-      <button class='remove'>Remove Item</button>
-      </div>`
-    );
-    $(`#${id}`).html("0");
+    if (Number($(this).parent().children()[2].innerText) > 0) {
+      const $price = (Number($($($(this).parent().parent().children()[0]).children()[1]).children()[0].innerText));
+
+      let item = [];
+      let $quantityObject = $(this).parent().children()[2];
+      let id = $($quantityObject).attr("id");
+
+      item.push(id);
+      item.push($($(this).parent().parent().children()[0]).children()[0].innerText);
+      item.push(Number($(this).parent().children()[2].innerText));
+      item.push($price);
+      totalCost +=
+        parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
+      $("#order_total").html(`<div>Order Total: $${totalCost.toFixed(2)}</div><br><br>`);
+      $("#order_summary").append(
+        `<div>
+          <div>Menu Item: #<span>${item[0]}</span></div>
+          <div><span>${item[1]}</span> x<span>${item[2]}</span></div>
+          <div>Item Total: $<span>${Number(item[3]).toFixed(2)}</span></div>
+          <br>
+          <button class='remove'>Remove Item</button>
+          <br>
+          <br>
+        </div>`
+      );
+      $(`#${id}`).html('0');
+      quantities[id - 1] = 0;
+    };
   });
   // What happens when the user clicks on the Remove button
   $(document).on("click", ".remove", function (event) {
     event.preventDefault();
-    totalCost -=
-      Number($(this).parent().children()[3].innerText) *
-      Number($(this).parent().children()[4].innerText);
-    $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
+    console.log(Number($($(this).parent().children()[2]).children()[0].innerText));
+    totalCost -= Number($($(this).parent().children()[2]).children()[0].innerText);
+    $("#order_total").html(`Order Total: $${totalCost.toFixed(2)}<br><br>`);
     $(this).parent().remove();
   });
   // What happens when the user clicks the + button
   $(document).on("click", ".add_quantity", function (event) {
     event.preventDefault();
-    console.log("TEST");
     let $idHolder = $(this).parent().children()[2];
-    console.log($idHolder);
     let i = Number($($idHolder).attr("id"));
     quantities[i - 1]++;
     $(this)
@@ -102,9 +104,10 @@ $(document).ready(function () {
   $(document).on("click", ".red_quantity", function (event) {
     event.preventDefault();
     let $idHolder = $(this).parent().children()[2];
-    console.log($idHolder);
     let i = Number($($idHolder).attr("id"));
-    quantities[i - 1]--;
+    if (quantities[i - 1] !== 0) {
+      quantities[i - 1]--;
+    }
     $(this)
       .parent()
       .find(`#${i}`)
@@ -117,40 +120,30 @@ $(document).ready(function () {
       customerDetails: {},
       orderDetails: [],
     };
-    const billingAddressArray = $(
-      $($(this).children()[0]).children()[0]
-    ).children();
-    console.log(billingAddressArray);
+    const billingAddressArray = $($($(this).children()[0]).children()[0]).children();
     for (const child of billingAddressArray) {
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id");
         orderObject.customerDetails[$idHolder] = $(child).val();
       }
     }
-    const creditCardDetailsArray = $(
-      $($(this).children()[0]).children()[1]
-    ).children();
-    console.log(creditCardDetailsArray);
+    const creditCardDetailsArray = $($($(this).children()[0]).children()[1]).children();
     for (const child of creditCardDetailsArray) {
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id");
         orderObject.customerDetails[$idHolder] = $(child).val();
       }
     }
-    console.log(orderObject.customerDetails);
-    console.log($("#order_summary").children()[1]);
     for (let i = 1; i < $("#order_summary").children().length; i++) {
       let $item = $("#order_summary").children()[i];
       let item = {};
       item.order_id = 0;
-      item.menu_id = $($item).children()[0].innerText;
-      item.quantity = $($item).children()[2].innerText;
+      item.menu_id = $($item).children()[0].children[0].innerText;
+      item.quantity = Number($($($item).children()[1]).children()[1].innerText);
       orderObject.orderDetails.push(item);
     }
+
     $.post("/api/orders", orderObject, (data) => {
-      console.log(data);
-      console.log(data.order_details.id);
-      console.log(orderObject.orderDetails);
       for (const each of orderObject.orderDetails) {
         each.order_id = data.order_details.id;
         $.post("/api/order_items", each, (data) => {
@@ -164,7 +157,7 @@ $(document).ready(function () {
     <button id="order-again">Order Again</button>
     <a href="/${data.order_details.id}">Click here to track your order!</a>
     `);
-      $.post("/api/send_sms");
+      //$.post("/api/send_sms");
     });
   });
   $(document).on("click", "#order-again", function (event) {
