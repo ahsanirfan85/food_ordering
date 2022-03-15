@@ -84,13 +84,24 @@ $(document).ready(function () {
       .find(`#${i}`)
       .html(`${quantities[i - 1]}`);
   });
+  // What happens when the user clicks the Place Order button
   $("#order-form").submit(function (event) {
     event.preventDefault();
     let orderObject = {
       customerDetails: {},
       orderDetails: [],
     };
-    for (const child of $(this).children()) {
+    const billingAddressArray = $($($(this).children()[0]).children()[0]).children();
+    console.log(billingAddressArray);
+    for (const child of billingAddressArray) {
+      if ($(child).attr("id")) {
+        const $idHolder = $(child).attr("id");
+        orderObject.customerDetails[$idHolder] = $(child).val();
+      }
+    }
+    const creditCardDetailsArray = $($($(this).children()[0]).children()[1]).children();
+    console.log(creditCardDetailsArray);
+    for (const child of creditCardDetailsArray) {
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id");
         orderObject.customerDetails[$idHolder] = $(child).val();
@@ -121,7 +132,9 @@ $(document).ready(function () {
     <div>${data.order_details.name}! Your order has been sent!</div>
     <br>
     <button id="order-again">Order Again</button>
+    <a href="/2">Click here to track your order!</a>
     `);
+      $.post("/api/send_sms");
     });
   });
   $(document).on("click", "#order-again", function (event) {
