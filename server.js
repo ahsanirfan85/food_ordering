@@ -40,7 +40,7 @@ const widgetsRoutes = require("./routes/widgets");
 const menuRoutes = require("./routes/menu_items"); // Ahsan's Comment: This is part of the code that returns an object with all the menu items in it. When you put 'localhost:3000/ap/menu_items' in the browser, it queries the DB and returns an object with all the queried menu items in it.
 const ordersRoutes = require("./routes/orders");
 const orderItemsRoutes = require("./routes/order_items");
-const sendSmsRoutes = require("./routes/send_sms");
+//const sendSmsRoutes = require("./routes/send_sms");
 //const individualOrderRoutes = require("./routes/individual_orders");
 
 // Mount all resource routes
@@ -50,7 +50,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/menu_items", menuRoutes(db)); // Ahsan's Comment: This is part of the code that returns an object with all the menu items in it. When you put 'localhost:3000/ap/menu_items' in the browser, it queries the DB and returns an object with all the queried menu items in it.
 app.use("/api/orders", ordersRoutes(db));
 app.use("/api/order_items", orderItemsRoutes(db));
-app.use("/api/send_sms", sendSmsRoutes(db));
+//app.use("/api/send_sms", sendSmsRoutes(db));
 //app.use("/api/orders/:id", individualOrderRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
