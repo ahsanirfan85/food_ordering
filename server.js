@@ -40,6 +40,8 @@ const widgetsRoutes = require("./routes/widgets");
 const menuRoutes = require("./routes/menu_items"); // Ahsan's Comment: This is part of the code that returns an object with all the menu items in it. When you put 'localhost:3000/ap/menu_items' in the browser, it queries the DB and returns an object with all the queried menu items in it.
 const ordersRoutes = require("./routes/orders");
 const orderItemsRoutes = require("./routes/order_items");
+const sendSmsRoutes = require("./routes/send_sms");
+//const individualOrderRoutes = require("./routes/individual_orders");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -48,6 +50,8 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/menu_items", menuRoutes(db)); // Ahsan's Comment: This is part of the code that returns an object with all the menu items in it. When you put 'localhost:3000/ap/menu_items' in the browser, it queries the DB and returns an object with all the queried menu items in it.
 app.use("/api/orders", ordersRoutes(db));
 app.use("/api/order_items", orderItemsRoutes(db));
+app.use("/api/send_sms", sendSmsRoutes(db));
+//app.use("/api/orders/:id", individualOrderRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -57,6 +61,55 @@ app.use("/api/order_items", orderItemsRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/:id", (req, res) => {
+  console.log(req.params.id);
+  const templateVars = {
+    id: req.params.id
+  };
+    res.render("order", templateVars);
+    });
+
+app.get("/api/orders/:id", (req, res) => {
+  const orderId = req.params.id;
+  db.query(`
+    SELECT *
+    FROM orders_menu_bridge
+    JOIN menu_items
+    ON menu_items.id = orders_menu_bridge.menu_id
+    JOIN orders
+    ON orders.id = orders_menu_bridge.order_id
+    WHERE orders_menu_bridge.order_id = $1
+  ;`,[orderId])
+  .then(data => {
+    const order = data.rows;
+    res.json({  order  });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message  });
+  });
+});
+
+app.post('/sms', (req, res) => {
+  console.log("Message received!");
+  db.query(`
+    UPDATE orders
+    SET status = 'unknown'
+    WHERE id = 76
+    RETURNING *
+  ;`)
+  .then(data => {
+    const order = data.rows;
+    res.json({  order  });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message  });
+  });
 });
 
 app.listen(PORT, () => {
