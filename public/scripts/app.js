@@ -5,6 +5,8 @@ $(document).ready(function () {
     <div class="menu-wrapper">
       <div>
         <div class="name-price">
+        <div><img class="menu-size" src="${item.photo_url}" alt="image
+        "></div>
         <div class="name">${item.name}</div>
         <div class="price">$<span>${item.price / 100}</span></div>
         </div>
