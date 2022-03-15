@@ -3,7 +3,7 @@ $(document).ready(function () {
   const createMenuItem = function (item) {
     return `
       <div>
-        <div class="name">${item.name}</div>
+        <div id="menu-item-name" class="name">${item.name}</div>
         <div class="description">${item.description}</div>
         <div class="price">${item.price / 100}</div>
         <button class="click_me">Add</button>
