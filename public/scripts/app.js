@@ -3,21 +3,18 @@ $(document).ready(function () {
   const createMenuItem = function (item) {
     return `
     <div class="menu-wrapper">
-      <div>
-        
-        <div class="name">${item.name}</div>
-        <div class="description">${item.description}</div>
-        <div class="price">$<span>${item.price / 100}</span></div>
-      
-      <div class="display-flex align-items-center">
-        <button class="click_me mr-3">Add</button>
-        <button class="add_quantity mr-3">+</button>
-        <div class="mt-3 mr-3" id="${item.id}">0</div>
-        <button class="red_quantity">-</button>
-      </div>
-      
-      </div>  
+  <div>
+    <div class="name">${item.name}</div>
+    <div class="description">${item.description}</div>
+    <div class="price">$<span>${item.price / 100}</span></div>
+    <div class=" display-flex align-items-center">
+      <button class="click_me mr-3">Add</button>
+      <button class="add_quantity mr-3">+</button>
+      <div class="mt-3 mr-3" id="${item.id}">0</div>
+      <button class="red_quantity">-</button>
     </div>
+  </div>
+</div>
 
       
       `;
