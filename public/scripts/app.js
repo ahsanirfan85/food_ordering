@@ -63,7 +63,7 @@ $(document).ready(function () {
       parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
     $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
     $("#order_summary").append(
-      `<div>
+      `<div class="total-summary-list">
       <div>${item[0]}</div>
       <div>${item[1]}</div>
       <div>${item[2]}</div>
