@@ -25,21 +25,11 @@
 
 <section id="menu-categories">
   <div class="menu-category">
-    <!-- <ul>
-      <li><a href="#">Burgers</a></li>
-      <li><a href="#">Fries</a></li>
-      <li><a href="#">Coke</a></li>
-      <li><a href="#">Pizza</a></li>
-      <li><a href="#">Chicken Wings</a></li>
-      <li><a href="#">Fried Chicken</a></li>
-    </ul> -->
-    <h2>MENU</h2>
+    <h2>EXPLORE OUR MENU</h2>
   </div>
 </section>
 
-
- <section id="display-menu">
-
+ <section id="display-container">
   <div class="menu-container">
     <div class="display-item">
       <img src="./images/burgers.jpeg" class="menu-size"/>
@@ -61,17 +51,27 @@
       <img src="./images/chicken-wings.png" class="menu-size"/>
       <h3>CHICKEN WINGS</h3>
     </div>
-
   </div>
+</section>
 
-  <!-- TODO: ADD order summary -->
-  <section>
-    <div>ORDER SUMMARY BOX</div>
-  </section>
+<!-- MUSTAFA HERE -->
+<section class="display-menu-container">
+  <div id="display-menu"></div>
+</section>
+<!-- MUSTAFA HERE -->
 
- </section>
-
-
+<!-- Vince Start -->
+<section class="total-summary-container">
+  <div id="order_summary" class="menu_items">
+    <div id="order_total">
+      Order Total: 0
+    </div>
+  </div>
+  <div class="btn-area">
+  <a href="#form-area" class="btn conf-btn">Ready to pay</a>
+  </div>
+</section>
+<!-- Vince End -->
 
 <section id="form-area">
   <div class="order-details">
@@ -142,16 +142,7 @@
     </div>
   </div>
 
-<!-- TODO: add a box for total order -->
-  <section class="menu_items">
-    <div id="order_summary">
-      <div id="order_total">
-        Order Total: 0
-        <br>
-        <br>
-      </div>
-    </div>
-  </section>
+
 
   <!-- // Pseudo code Total in cart -->
   <!-- <div class="col-25">
@@ -182,7 +173,3 @@
 
 </body>
 </html>
-
-
-
-

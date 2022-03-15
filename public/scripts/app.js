@@ -20,6 +20,8 @@ $(document).ready(function () {
       
       </div>  
     </div>
+  </div>
+</div>
 
       
       `;
@@ -61,7 +63,7 @@ $(document).ready(function () {
       parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
     $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
     $("#order_summary").append(
-      `<div>
+      `<div class="total-summary-list">
       <div>${item[0]}</div>
       <div>${item[1]}</div>
       <div>${item[2]}</div>
@@ -113,7 +115,9 @@ $(document).ready(function () {
       customerDetails: {},
       orderDetails: [],
     };
-    const billingAddressArray = $($($(this).children()[0]).children()[0]).children();
+    const billingAddressArray = $(
+      $($(this).children()[0]).children()[0]
+    ).children();
     console.log(billingAddressArray);
     for (const child of billingAddressArray) {
       if ($(child).attr("id")) {
@@ -121,7 +125,9 @@ $(document).ready(function () {
         orderObject.customerDetails[$idHolder] = $(child).val();
       }
     }
-    const creditCardDetailsArray = $($($(this).children()[0]).children()[1]).children();
+    const creditCardDetailsArray = $(
+      $($(this).children()[0]).children()[1]
+    ).children();
     console.log(creditCardDetailsArray);
     for (const child of creditCardDetailsArray) {
       if ($(child).attr("id")) {
