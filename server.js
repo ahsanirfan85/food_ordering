@@ -93,6 +93,25 @@ app.get("/api/orders/:id", (req, res) => {
   });
 });
 
+app.post('/sms', (req, res) => {
+  console.log("Message received!");
+  db.query(`
+    UPDATE orders
+    SET status = 'unknown'
+    WHERE id = 76
+    RETURNING *
+  ;`)
+  .then(data => {
+    const order = data.rows;
+    res.json({  order  });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message  });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

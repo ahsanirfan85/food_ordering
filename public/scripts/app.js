@@ -132,7 +132,7 @@ $(document).ready(function () {
     <div>${data.order_details.name}! Your order has been sent!</div>
     <br>
     <button id="order-again">Order Again</button>
-    <a href="/2">Click here to track your order!</a>
+    <a href="/${data.order_details.id}">Click here to track your order!</a>
     `);
       $.post("/api/send_sms");
     });
