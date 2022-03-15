@@ -59,7 +59,7 @@ $(document).ready(function () {
       item.push($price);
       totalCost +=
         parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
-      $("#order_total").html(`Order Total: $${totalCost.toFixed(2)}<br><br>`);
+      $("#order_total").html(`<div>Order Total: $${totalCost.toFixed(2)}</div><br><br>`);
       $("#order_summary").append(
         `<div>
           <div>Menu Item: #<span>${item[0]}</span></div>
