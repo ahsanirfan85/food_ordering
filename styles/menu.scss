@@ -1,8 +1,7 @@
 #display-container {
   width: 100vw;
   display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
+  justify-content: center;
 }
 
 #display-menu-container {
@@ -28,12 +27,12 @@
 // Style for menu items
 .menu-container {
   display: flex;
+  justify-content: center;
   // flex-wrap: wrap;
   // width: 100vw;
 }
 
 .display-item {
-  flex: 1;
   margin: 40px 5px;
   padding: 0px;
 }
