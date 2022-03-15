@@ -1,5 +1,5 @@
 #display-container {
-  width: 100vw;
+  // width: 100vw;
   display: flex;
   justify-content: center;
 }
@@ -7,12 +7,14 @@
 #display-menu-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   height: 60vh;
 }
 
 #display-menu {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 2rem;
 }
 
@@ -32,7 +34,7 @@
 .menu-container {
   display: flex;
   justify-content: center;
-  // flex-wrap: wrap;
+  flex-wrap: wrap;
   // width: 100vw;
 }
 
@@ -53,11 +55,11 @@
 .menu-wrapper {
   display: flex;
   position: relative;
-  flex-direction: row;
+  flex-direction: column;
   margin-left: 30px;
   padding: 2rem;
-  border: 1px solid #000;
-  width: 100vw;
+  border: 1px solid #dadada;
+  margin-right: 2rem;
 }
 .name-price {
   display: flex;
@@ -102,7 +104,6 @@
   align-items: center;
 }
 
-// Added styles - Vince
 .total-summary-container {
   display: flex;
   flex-direction: column;
@@ -137,4 +138,15 @@
   justify-content: center;
   max-width: 200px;
   text-decoration: none;
+}
+
+// .menu-items-list {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   padding: 2rem;
+// }
+
+// mobile responsive
+@media only screen and (min-width: 768px) {
 }
