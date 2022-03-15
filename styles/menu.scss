@@ -1,15 +1,24 @@
-#display-menu {
+#display-container {
   width: 100vw;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#display-menu-container {
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+}
+
+#display-menu {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
 }
 
 .menu-category {
   display: flex;
-  justify-content: space-evenly;
-  list-style-type: none;
-  margin-left: 0;
-  padding: 0;
-  overflow: hidden;
+  justify-content: center;
   background-color: #000;
   font-size: 1rem;
 }
@@ -19,41 +28,15 @@
   color: #fff;
 }
 
-ul {
-  list-style-type: none;
-  overflow: hidden;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px;
-  width: 200px;
-  text-decoration: none;
-}
-
-li a:hover {
-  color: rgb(255, 230, 0);
-}
-
-.menu-selection {
-  display: flex;
-}
-
 // Style for menu items
 .menu-container {
   display: flex;
+  justify-content: center;
   // flex-wrap: wrap;
-  width: 100vw;
+  // width: 100vw;
 }
 
 .display-item {
-  flex: 1;
   margin: 40px 5px;
   padding: 0px;
 }
@@ -66,14 +49,15 @@ li a:hover {
   width: 360px;
   height: 200px;
 }
-// styles from jQuery
+
 .menu-wrapper {
   display: flex;
-  position:relative;
+  position: relative;
   flex-direction: row;
   margin-left: 30px;
+  padding: 2rem;
   border: 1px solid #000;
-  width: 200px;
+  width: 100vw;
 }
 .name-price {
   display: flex;
@@ -95,7 +79,6 @@ li a:hover {
 
 .click_me {
   font-size: 1rem;
-  
 }
 
 .menu-buttons {
@@ -117,4 +100,41 @@ li a:hover {
 
 .align-items-center {
   align-items: center;
+}
+
+// Added styles - Vince
+.total-summary-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 50vh;
+  padding: 5rem;
+}
+
+.menu_items {
+  display: flex;
+  justify-content: center;
+  width: 80;
+  height: 100%;
+  padding: 1.5rem 3rem;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.total-summary-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-area {
+  display: flex;
+  justify-content: center;
+}
+
+.conf-btn {
+  display: flex;
+  justify-content: center;
+  max-width: 200px;
+  text-decoration: none;
 }

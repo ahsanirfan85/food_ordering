@@ -18,6 +18,8 @@ $(document).ready(function () {
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 
       `;
@@ -44,6 +46,7 @@ $(document).ready(function () {
   // What happens when the user clicks the Add button
   $(document).on("click", ".click_me", function (event) {
     event.preventDefault();
+<<<<<<< HEAD
     if (Number($(this).parent().children()[2].innerText) > 0) {
       const $price = (Number($($($(this).parent().parent().children()[0]).children()[1]).children()[0].innerText));
 
@@ -72,6 +75,33 @@ $(document).ready(function () {
       $(`#${id}`).html('0');
       quantities[id - 1] = 0;
     };
+=======
+    const $price = Number(
+      $(this).parent().parent().children()[2].children[0].innerText
+    );
+    let item = [];
+    let $quantityObject = $(this).parent().children()[2];
+    let id = $($quantityObject).attr("id");
+    item.push(id);
+    item.push($(this).parent().parent().children()[0].innerText);
+    item.push($(this).parent().parent().children()[1].innerText);
+    item.push($(this).parent().children()[2].innerText);
+    item.push($price);
+    totalCost +=
+      parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
+    $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
+    $("#order_summary").append(
+      `<div class="total-summary-list">
+      <div>${item[0]}</div>
+      <div>${item[1]}</div>
+      <div>${item[2]}</div>
+      <div>${item[3]}</div>
+      <div>${item[4]}</div>
+      <button class='remove'>Remove Item</button>
+      </div>`
+    );
+    $(`#${id}`).html("0");
+>>>>>>> a47922027ce0b851386671940d1e3265d1c608d5
   });
   // What happens when the user clicks on the Remove button
   $(document).on("click", ".remove", function (event) {
@@ -112,14 +142,28 @@ $(document).ready(function () {
       customerDetails: {},
       orderDetails: [],
     };
+<<<<<<< HEAD
     const billingAddressArray = $($($(this).children()[0]).children()[0]).children();
+=======
+    const billingAddressArray = $(
+      $($(this).children()[0]).children()[0]
+    ).children();
+    console.log(billingAddressArray);
+>>>>>>> a47922027ce0b851386671940d1e3265d1c608d5
     for (const child of billingAddressArray) {
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id");
         orderObject.customerDetails[$idHolder] = $(child).val();
       }
     }
+<<<<<<< HEAD
     const creditCardDetailsArray = $($($(this).children()[0]).children()[1]).children();
+=======
+    const creditCardDetailsArray = $(
+      $($(this).children()[0]).children()[1]
+    ).children();
+    console.log(creditCardDetailsArray);
+>>>>>>> a47922027ce0b851386671940d1e3265d1c608d5
     for (const child of creditCardDetailsArray) {
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id");
