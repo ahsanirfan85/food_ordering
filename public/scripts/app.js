@@ -3,15 +3,22 @@ $(document).ready(function () {
   const createMenuItem = function (item) {
     return `
     <div class="menu-wrapper">
-  <div>
-    <div class="name">${item.name}</div>
-    <div class="description">${item.description}</div>
-    <div class="price">$<span>${item.price / 100}</span></div>
-    <div class=" display-flex align-items-center">
-      <button class="click_me mr-3">Add</button>
-      <button class="add_quantity mr-3">+</button>
-      <div class="mt-3 mr-3" id="${item.id}">0</div>
-      <button class="red_quantity">-</button>
+      <div>
+        <div class="name-price">
+        <div class="name">${item.name}</div>
+        <div class="price">$<span>${item.price / 100}</span></div>
+        </div>
+        <div class="description">${item.description}</div>
+        
+      
+      <div class="display-flex align-items-center">
+        <button class="click_me mr-3">Add to Order</button>
+        <button class="add_quantity mr-3">+</button>
+        <div class="mt-3 mr-3" id="${item.id}">0</div>
+        <button class="red_quantity">-</button>
+      </div>
+      
+      </div>  
     </div>
   </div>
 </div>
@@ -108,7 +115,9 @@ $(document).ready(function () {
       customerDetails: {},
       orderDetails: [],
     };
-    const billingAddressArray = $($($(this).children()[0]).children()[0]).children();
+    const billingAddressArray = $(
+      $($(this).children()[0]).children()[0]
+    ).children();
     console.log(billingAddressArray);
     for (const child of billingAddressArray) {
       if ($(child).attr("id")) {
@@ -116,7 +125,9 @@ $(document).ready(function () {
         orderObject.customerDetails[$idHolder] = $(child).val();
       }
     }
-    const creditCardDetailsArray = $($($(this).children()[0]).children()[1]).children();
+    const creditCardDetailsArray = $(
+      $($(this).children()[0]).children()[1]
+    ).children();
     console.log(creditCardDetailsArray);
     for (const child of creditCardDetailsArray) {
       if ($(child).attr("id")) {
@@ -149,7 +160,7 @@ $(document).ready(function () {
     <div>${data.order_details.name}! Your order has been sent!</div>
     <br>
     <button id="order-again">Order Again</button>
-    <a href="/2">Click here to track your order!</a>
+    <a href="/${data.order_details.id}">Click here to track your order!</a>
     `);
       $.post("/api/send_sms");
     });

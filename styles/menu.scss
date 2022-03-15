@@ -7,11 +7,11 @@
   display: flex;
   justify-content: space-evenly;
   list-style-type: none;
-  margin: 0;
+  margin-left: 0;
   padding: 0;
   overflow: hidden;
   background-color: #000;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .menu-category h2 {
@@ -69,13 +69,20 @@ li a:hover {
 // styles from jQuery
 .menu-wrapper {
   display: flex;
+  position: relative;
   flex-direction: row;
+  margin-left: 30px;
   border: 1px solid #000;
   width: 100vw;
 }
-
+.name-price {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  justify-content: space-between;
+}
 .name {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .description {
@@ -83,11 +90,11 @@ li a:hover {
 }
 
 .price {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .click_me {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .menu-buttons {
