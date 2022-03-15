@@ -7,11 +7,11 @@
   display: flex;
   justify-content: space-evenly;
   list-style-type: none;
-  margin: 0;
+  margin-left: 0;
   padding: 0;
   overflow: hidden;
   background-color: #000;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .menu-category h2 {
@@ -66,7 +66,54 @@ li a:hover {
   width: 360px;
   height: 200px;
 }
+// styles from jQuery
+.menu-wrapper {
+  display: flex;
+  position:relative;
+  flex-direction: row;
+  margin-left: 30px;
+  border: 1px solid #000;
+  width: 200px;
+}
+.name-price {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  justify-content: space-between;
+}
+.name {
+  font-size: 1.2rem;
+}
 
-#menu-item-name {
-  font-size: 2.5rem;
+.description {
+  font-size: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+}
+
+.click_me {
+  font-size: 1rem;
+}
+
+.menu-buttons {
+  border: 1px solid #000;
+  width: 200px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mr-3 {
+  margin-right: 15px;
+}
+
+.align-items-center {
+  align-items: center;
 }

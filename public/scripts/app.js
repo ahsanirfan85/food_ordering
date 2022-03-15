@@ -2,18 +2,26 @@
 $(document).ready(function () {
   const createMenuItem = function (item) {
     return `
+    <div class="menu-wrapper">
       <div>
-        <div id="menu-item-name" class="name">${item.name}</div>
+        <div class="name-price">
+        <div class="name">${item.name}</div>
+        <div class="price">$<span>${item.price / 100}</span></div>
+        </div>
         <div class="description">${item.description}</div>
-        <div class="price">${item.price / 100}</div>
-        <button class="click_me">Add</button>
-        <br>
-        <button class="add_quantity">+</button>
-        <div id="${item.id}">0</div>
+        
+      
+      <div class="display-flex align-items-center">
+        <button class="click_me mr-3">Add to Order</button>
+        <button class="add_quantity mr-3">+</button>
+        <div class="mt-3 mr-3" id="${item.id}">0</div>
         <button class="red_quantity">-</button>
-        <br>
-        <br>
       </div>
+      
+      </div>  
+    </div>
+
+      
       `;
   };
 
@@ -38,18 +46,29 @@ $(document).ready(function () {
   // What happens when the user clicks the Add button
   $(document).on("click", ".click_me", function (event) {
     event.preventDefault();
-    const $price = Number($(this).parent().children()[2].innerText);
+    const $price = Number(
+      $(this).parent().parent().children()[2].children[0].innerText
+    );
     let item = [];
-    let $quantityObject = $(this).parent().children()[6];
+    let $quantityObject = $(this).parent().children()[2];
     let id = $($quantityObject).attr("id");
     item.push(id);
-    item.push($(this).parent().children()[0].innerText);
-    item.push($(this).parent().children()[6].innerText);
+    item.push($(this).parent().parent().children()[0].innerText);
+    item.push($(this).parent().parent().children()[1].innerText);
     item.push($(this).parent().children()[2].innerText);
-    totalCost += $price * Number($(this).parent().children()[6].innerText);
+    item.push($price);
+    totalCost +=
+      parseFloat($price) * parseFloat($(this).parent().children()[2].innerText);
     $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
     $("#order_summary").append(
-      `<div><div>${item[0]}</div><div>${item[1]}</div><div>${item[2]}</div><div>${item[3]}</div><button class='remove'>Remove Item</button><br></div>`
+      `<div>
+      <div>${item[0]}</div>
+      <div>${item[1]}</div>
+      <div>${item[2]}</div>
+      <div>${item[3]}</div>
+      <div>${item[4]}</div>
+      <button class='remove'>Remove Item</button>
+      </div>`
     );
     $(`#${id}`).html("0");
   });
@@ -57,15 +76,17 @@ $(document).ready(function () {
   $(document).on("click", ".remove", function (event) {
     event.preventDefault();
     totalCost -=
-      Number($(this).parent().children()[1].innerText) *
-      Number($(this).parent().children()[2].innerText);
+      Number($(this).parent().children()[3].innerText) *
+      Number($(this).parent().children()[4].innerText);
     $("#order_total").html(`Order Total: ${totalCost}<br><br>`);
     $(this).parent().remove();
   });
   // What happens when the user clicks the + button
   $(document).on("click", ".add_quantity", function (event) {
     event.preventDefault();
-    let $idHolder = $(this).parent().children()[6];
+    console.log("TEST");
+    let $idHolder = $(this).parent().children()[2];
+    console.log($idHolder);
     let i = Number($($idHolder).attr("id"));
     quantities[i - 1]++;
     $(this)
@@ -76,7 +97,8 @@ $(document).ready(function () {
   // What happens when the user clicks the - button
   $(document).on("click", ".red_quantity", function (event) {
     event.preventDefault();
-    let $idHolder = $(this).parent().children()[6];
+    let $idHolder = $(this).parent().children()[2];
+    console.log($idHolder);
     let i = Number($($idHolder).attr("id"));
     quantities[i - 1]--;
     $(this)
