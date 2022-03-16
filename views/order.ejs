@@ -9,8 +9,23 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./styles/main.css">
+    <style>
+      .orders {
+        color: white;
+        font-size: 1.3rem;
+        text-align: left;
+        font-family: "Tahoma", Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: row;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
   </head>
   <body class="hero">
-    <div><div>Order #</div><div><%= id %></div></div><br>
+    <div class="orders"><div>Order #</div><div><%= id %></div></div><br>
+    <div class="orders" id="orders"></div>
   </body>
 </html>
