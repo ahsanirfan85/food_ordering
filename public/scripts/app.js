@@ -43,13 +43,10 @@ $(document).ready(function () {
 
   // What happens when the user clicks the + button
   $(document).on("click", ".add_quantity", function (event) {
-
     event.preventDefault(); // prevents any default action associated with the button
 
     // the below two lines grab the id of the menu item whose quantity needs to be added to
-    let $idHolder = $(this)
-                      .parent()
-                      .children()[2];
+    let $idHolder = $(this).parent().children()[2];
     let i = Number($($idHolder).attr("id"));
 
     quantities[i - 1]++; // add 1 to the quantity
@@ -63,7 +60,6 @@ $(document).ready(function () {
 
   // What happens when the user clicks the - button
   $(document).on("click", ".red_quantity", function (event) {
-
     event.preventDefault(); // prevents any default action associated with the button
 
     // the below two lines grab the id of the menu item whose quantity needs to be reduced
@@ -90,32 +86,11 @@ $(document).ready(function () {
 
     // The condition here checks if the quantity is not zero. This conditional will only allow the user to add an item to their order if the quantity of that item is greater than zero
     if (Number($(this).parent().children()[2].innerText) > 0) {
-<<<<<<< HEAD
       const $price = Number(
         $(
           $($(this).parent().parent().children()[0]).children()[1]
         ).children()[0].innerText
       ); // extracts the price of the item from the menu text
-
-      let item = []; // creates an array to store each item in. it will store its id, it's name, it's quantity and it's price
-      let $quantityObject = $(this).parent().children()[2]; // extracts the DOM object that stores the quantity and the menu id from the menu
-      let id = $($quantityObject).attr("id"); // extracts the menu id from the DOM object extracted above
-
-      item.push(id); // pushes the menu id into the item array
-      item.push(
-        $($(this).parent().parent().children()[0]).children()[0].innerText
-      ); // extracts the name of the item from the menu and pushes
-      item.push(Number($(this).parent().children()[2].innerText));
-      item.push($price);
-      totalCost +=
-        parseFloat($price) *
-        parseFloat($(this).parent().children()[2].innerText);
-      $("#order_total").html(
-        `<div>Order Total: $${totalCost.toFixed(2)}</div><br><br>`
-      );
-=======
-
-      const $price = (Number($($($(this).parent().parent().children()[0]).children()[1]).children()[0].innerText)); // extracts the price of the item from the menu text
 
       let item = []; // creates an array to store each item in. it will store its id, it's name, it's quantity and it's price
 
@@ -125,16 +100,21 @@ $(document).ready(function () {
 
       // the four lines below push the id, the name of the menu item, the quantity and the price into the array
       item.push(id); // menu id
-      item.push($($(this).parent().parent().children()[0]).children()[0].innerText); // name of menu item
+      item.push(
+        $($(this).parent().parent().children()[0]).children()[0].innerText
+      ); // name of menu item
       item.push(Number($(this).parent().children()[2].innerText)); // quantity of menu item
       item.push($price); // price of menu item
 
-      totalCost += parseFloat($price) * parseFloat($(this).parent().children()[2].innerText); // updates total cost variable based on the selection
+      totalCost +=
+        parseFloat($price) *
+        parseFloat($(this).parent().children()[2].innerText); // updates total cost variable based on the selection
 
-      $("#order_total").html(`<div>Order Total: $${totalCost.toFixed(2)}</div><br><br>`); // displays total cost on the page
+      $("#order_total").html(
+        `<div>Order Total: $${totalCost.toFixed(2)}</div><br><br>`
+      ); // displays total cost on the page
 
       // displays selected menu items on the page
->>>>>>> cc83cc5fcce19d27c328d53ecdda7419a5f46daf
       $("#order_summary").append(
         `<div>
           <div>Menu Item: #<span>${item[0]}</span></div>
@@ -146,70 +126,27 @@ $(document).ready(function () {
           <br>
         </div>`
       );
-<<<<<<< HEAD
-      $(`#${id}`).html("0");
-      quantities[id - 1] = 0;
-    }
-=======
 
-      $(`#${id}`).html('0'); // resets the quantity count in the menu section on the page to 0
+      $(`#${id}`).html("0"); // resets the quantity count in the menu section on the page to 0
       quantities[id - 1] = 0; // resets the quantity array to zero
-    };
->>>>>>> cc83cc5fcce19d27c328d53ecdda7419a5f46daf
+    }
   });
 
   // What happens when the user clicks on the Remove button
   $(document).on("click", ".remove", function (event) {
-<<<<<<< HEAD
-    event.preventDefault();
-    console.log(
-      Number($($(this).parent().children()[2]).children()[0].innerText)
-    );
-    totalCost -= Number(
-      $($(this).parent().children()[2]).children()[0].innerText
-    );
-    $("#order_total").html(`Order Total: $${totalCost.toFixed(2)}<br><br>`);
-    $(this).parent().remove();
-  });
-  // What happens when the user clicks the + button
-  $(document).on("click", ".add_quantity", function (event) {
-    event.preventDefault();
-    let $idHolder = $(this).parent().children()[2];
-    let i = Number($($idHolder).attr("id"));
-    quantities[i - 1]++;
-    $(this)
-      .parent()
-      .find(`#${i}`)
-      .html(`${quantities[i - 1]}`);
-  });
-  // What happens when the user clicks the - button
-  $(document).on("click", ".red_quantity", function (event) {
-    event.preventDefault();
-    let $idHolder = $(this).parent().children()[2];
-    let i = Number($($idHolder).attr("id"));
-    if (quantities[i - 1] !== 0) {
-      quantities[i - 1]--;
-    }
-    $(this)
-      .parent()
-      .find(`#${i}`)
-      .html(`${quantities[i - 1]}`);
-=======
-
     event.preventDefault(); // prevents any default action associated with the button
 
-    totalCost -= Number($($(this).parent().children()[2]).children()[0].innerText); // reduces the total cost variable
+    totalCost -= Number(
+      $($(this).parent().children()[2]).children()[0].innerText
+    ); // reduces the total cost variable
 
     $("#order_total").html(`Order Total: $${totalCost.toFixed(2)}<br><br>`); // updates the total cost on the page
 
     $(this).parent().remove(); //removes the item from the ordery summary on the page
-
->>>>>>> cc83cc5fcce19d27c328d53ecdda7419a5f46daf
   });
 
   // What happens when the user clicks the Place Order button
   $("#order-form").submit(function (event) {
-
     event.preventDefault(); // prevents any default action associated with the button
 
     // creates the object to store customer details from the form on the page, plus the items they are ordering
@@ -217,35 +154,25 @@ $(document).ready(function () {
       customerDetails: {},
       orderDetails: [],
     };
-<<<<<<< HEAD
+
     const billingAddressArray = $(
       $($(this).children()[0]).children()[0]
-    ).children();
-=======
-
-    const billingAddressArray = $($($(this).children()[0]).children()[0]).children(); // stores the form values from the billing address section in this array
+    ).children(); // stores the form values from the billing address section in this array
 
     // this for loop pushes the values of the billingAddressArray into the orderObject
->>>>>>> cc83cc5fcce19d27c328d53ecdda7419a5f46daf
     for (const child of billingAddressArray) {
-
       // conditional to check if the 'child' has an id or not; if the 'child' has an id, the value of the child will be pushed into the orderObject
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id"); // extracts the menu id
         orderObject.customerDetails[$idHolder] = $(child).val();
       }
     }
-<<<<<<< HEAD
+
     const creditCardDetailsArray = $(
       $($(this).children()[0]).children()[1]
-    ).children();
-=======
+    ).children(); // stores the form values from the credit card section in this array
 
-    const creditCardDetailsArray = $($($(this).children()[0]).children()[1]).children(); // stores the form values from the credit card section in this array
-
->>>>>>> cc83cc5fcce19d27c328d53ecdda7419a5f46daf
     for (const child of creditCardDetailsArray) {
-
       // conditional to check if the 'child' has an id or not; if the 'child' has an id, the value of the child will be pushed into the orderObject
       if ($(child).attr("id")) {
         const $idHolder = $(child).attr("id");
