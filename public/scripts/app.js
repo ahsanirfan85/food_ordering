@@ -1,32 +1,30 @@
-// Client facing scripts here
 $(document).ready(function () {
+  // This function creates the HTML snippet for each menu item.
   const createMenuItem = function (item) {
     return `
-    <div class="menu-wrapper">
-      <div>
+      <div class="menu-wrapper">
+        <div class="menu-items">
+          <img class="menu-size" src="${item.photo_url}" alt="image">
+          <div class="name-desc">
+            <div class="name">${item.name}</div>
+            <div class="description">${item.description}</div>
+          </div>
         <div class="name-price">
-          <div class="name">${item.name}</div>
-          <div class="price">$<span>${Number(item.price / 100).toFixed(2)}</span></div>
-        </div>
-
-        <div class="description">${item.description}</div>
+        <div class="price">$<span>${Number(item.price / 100).toFixed(2)}</span></div>
         <div class="display-flex align-items-center">
-          <button class="click_me mr-3">Add to Order</button>
-          <button class="add_quantity mr-3">+</button>
-          <div class="mt-3 mr-3" id="${item.id}">0</div>
-          <button class="red_quantity">-</button>
+          <div class="btn-qty">
+            <button class="add_quantity mr-3 btn">+</button>
+            <div class="mt-3 mr-3" id="${item.id}">0</div>
+            <button class="red_quantity mr-3 btn">-</button>
+          </div>
+          <button class="click_me mr-3 btn">Add to Order</button>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+  `;};
 
+  let quantities = []; // This array is to store the quantities of each menu item selected by the user.
 
-      `;
-  };
-
-  let quantities = [];
-
+  // This function calls the previous function as many times as there are menu items in the database on the back end to render the full menu.
   const renderMenu = function (input) {
     for (const menuItem of input.menu_items) {
       $("#display-menu").append(createMenuItem(menuItem));
@@ -34,27 +32,32 @@ $(document).ready(function () {
     }
   };
 
+  // This function makes the AJAX request that gets the menu items from the database. It then calls the previous function to render the menu.
   const loadMenu = function () {
     $.ajax("/api/menu_items", { method: "GET" }).then(function (data) {
       renderMenu(data);
     });
   };
 
-  loadMenu();
+  loadMenu(); // The previous function is invokved here to begin the process of calling the menu items from the database and rendering them in the browser
 
-  let totalCost = 0;
+  let totalCost = 0; // This variable stores the total cost of the order made by the user
+
   // What happens when the user clicks the Add button
   $(document).on("click", ".click_me", function (event) {
-    event.preventDefault();
+
+    event.preventDefault(); // prevents any default action associated with the button
+
+    // The condition here checks if the quantity is not zero. This conditional will only allow the user to add an item to their order if the quantity of that item is greater than zero
     if (Number($(this).parent().children()[2].innerText) > 0) {
-      const $price = (Number($($($(this).parent().parent().children()[0]).children()[1]).children()[0].innerText));
+      const $price = (Number($($($(this).parent().parent().children()[0]).children()[1]).children()[0].innerText)); // extracts the price of the item from the menu text
 
-      let item = [];
-      let $quantityObject = $(this).parent().children()[2];
-      let id = $($quantityObject).attr("id");
+      let item = []; // creates an array to store each item in. it will store its id, it's name, it's quantity and it's price
+      let $quantityObject = $(this).parent().children()[2]; // extracts the DOM object that stores the quantity and the menu id from the menu
+      let id = $($quantityObject).attr("id"); // extracts the menu id from the DOM object extracted above
 
-      item.push(id);
-      item.push($($(this).parent().parent().children()[0]).children()[0].innerText);
+      item.push(id); // pushes the menu id into the item array
+      item.push($($(this).parent().parent().children()[0]).children()[0].innerText); // extracts the name of the item from the menu and pushes
       item.push(Number($(this).parent().children()[2].innerText));
       item.push($price);
       totalCost +=
@@ -136,7 +139,7 @@ $(document).ready(function () {
       item.quantity = Number($($($item).children()[1]).children()[1].innerText);
       orderObject.orderDetails.push(item);
     }
-
+    console.log(orderObject);
     $.post("/api/orders", orderObject, (data) => {
       for (const each of orderObject.orderDetails) {
         each.order_id = data.order_details.id;
@@ -144,12 +147,20 @@ $(document).ready(function () {
           console.log(data);
         });
       }
-      $("body").empty();
+      $("#ready-to-pay-button").remove();
+      $("#form-area").remove();
       $("body").append(`
-    <div>${data.order_details.name}! Your order has been sent!</div>
-    <br>
-    <button id="order-again">Order Again</button>
-    <a href="/${data.order_details.id}">Click here to track your order!</a>
+      <div class="order-confirmation">
+        <div>${data.order_details.name}! Your order has been sent!</div>
+        <br>
+        <div>
+
+        </div>
+        <button id="order-again">Order Again</button>
+        <br>
+        <br>
+        <a href="/${data.order_details.id}">Click here to track your order!</a>
+      <div>
     `);
       //$.post("/api/send_sms");
     });

@@ -1,28 +1,28 @@
-// load .env data into process.env
+// Loading .env data into process.env
 require("dotenv").config();
 
-// Web server config
+// Defining the Port
 const PORT = process.env.PORT || 8080;
-const sassMiddleware = require("./lib/sass-middleware");
-const express = require("express");
-const app = express();
-const morgan = require("morgan");
+
+// Express App Setup
+const express = require("express"); // requiring express
+const app = express(); // what does this do?
+app.use(express.urlencoded({ extended: true })); // what does this do?
+app.use(express.static("public")); // serves up the static files to the front end
 
 // PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
+const { Pool } = require("pg"); // requiring postgresql
+const dbParams = require("./lib/db.js"); // requiring the database parameters
+const db = new Pool(dbParams); // creating a new connection to the DB
+db.connect(); // connecting to the database
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
-app.use(morgan("dev"));
+// Morgan Setup
+const morgan = require("morgan"); // requiring morgan
+app.use(morgan("dev")); // use morgan in this file
 
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-
-app.use(
+// SASS Middleware Setup
+const sassMiddleware = require("./lib/sass-middleware"); // requiring the sass middleware
+app.use(  // what does this do?
   "/styles",
   sassMiddleware({
     source: __dirname + "/styles",
@@ -31,46 +31,40 @@ app.use(
   })
 );
 
-app.use(express.static("public"));
+// Setting the EJS view engine
+app.set("view engine", "ejs");
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
-const menuRoutes = require("./routes/menu_items"); // Ahsan's Comment: This is part of the code that returns an object with all the menu items in it. When you put 'localhost:3000/ap/menu_items' in the browser, it queries the DB and returns an object with all the queried menu items in it.
+// Requires the DB query that serves up the menu items from the database on the front page
+const menuRoutes = require("./routes/menu_items");
+app.use("/api/menu_items", menuRoutes(db));
+
+// Requires the DB query that puts the customer's details into the database
 const ordersRoutes = require("./routes/orders");
-const orderItemsRoutes = require("./routes/order_items");
-//const sendSmsRoutes = require("./routes/send_sms");
-//const individualOrderRoutes = require("./routes/individual_orders");
-
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/menu_items", menuRoutes(db)); // Ahsan's Comment: This is part of the code that returns an object with all the menu items in it. When you put 'localhost:3000/ap/menu_items' in the browser, it queries the DB and returns an object with all the queried menu items in it.
 app.use("/api/orders", ordersRoutes(db));
+
+// Requires the DB query that puts the order details into the database
+const orderItemsRoutes = require("./routes/order_items");
 app.use("/api/order_items", orderItemsRoutes(db));
-//app.use("/api/send_sms", sendSmsRoutes(db));
-//app.use("/api/orders/:id", individualOrderRoutes(db));
 
-// Note: mount other resources here, using the same pattern above
+// requires the routing to send confirmation text messages to both the restaurant owner and the person who put in the order
+// const sendSmsRoutes = require("./routes/send_sms");  // Comment or uncomment this as necessary
+// app.use("/api/send_sms", sendSmsRoutes(db)); // Comment or uncomment this as necessary
 
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
+// Route to render the home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Route to load the order status page
 app.get("/:id", (req, res) => {
   console.log(req.params.id);
   const templateVars = {
     id: req.params.id
   };
-    res.render("order", templateVars);
-    });
+  res.render("order", templateVars);
+});
 
+// Route to return the order ID number after it has been created after the user places the order
 app.get("/api/orders/:id", (req, res) => {
   const orderId = req.params.id;
   db.query(`
@@ -93,6 +87,7 @@ app.get("/api/orders/:id", (req, res) => {
   });
 });
 
+// Route to allow restaurant owner to update the order status via text message
 app.post('/sms', (req, res) => {
   console.log("Message received!");
   db.query(`
@@ -112,7 +107,7 @@ app.post('/sms', (req, res) => {
   });
 });
 
+// Express app listening for requests
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-// Update for Server: No changes made//
