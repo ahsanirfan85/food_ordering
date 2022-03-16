@@ -89,7 +89,7 @@ $(document).ready(function () {
   // What happens when the user clicks the + button
   $(document).on("click", ".add_quantity", function (event) {
     event.preventDefault();
-    let $idHolder = $(this).parent().children()[2];
+    let $idHolder = $(this).parent().children()[1];
     let i = Number($($idHolder).attr("id"));
     quantities[i - 1]++;
     $(this)
@@ -100,7 +100,7 @@ $(document).ready(function () {
   // What happens when the user clicks the - button
   $(document).on("click", ".red_quantity", function (event) {
     event.preventDefault();
-    let $idHolder = $(this).parent().children()[2];
+    let $idHolder = $(this).parent().children()[1];
     let i = Number($($idHolder).attr("id"));
     if (quantities[i - 1] !== 0) {
       quantities[i - 1]--;
