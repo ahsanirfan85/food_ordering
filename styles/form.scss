@@ -24,11 +24,6 @@
   flex: 25%;
 }
 
-.col-50 {
-  -ms-flex: 50%; /* IE10 */
-  flex: 50%;
-}
-
 .col-75 {
   -ms-flex: 75%; /* IE10 */
   flex: 75%;
@@ -38,11 +33,6 @@
 .col-50,
 .col-75 {
   padding: 0 16px;
-}
-
-.container {
-  background-color: #f2f2f2;
-  padding: 5px 30px 15px 30px;
 }
 
 input[type="text"] {
@@ -85,10 +75,31 @@ span.price {
   color: grey;
 }
 
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media only screen and (min-width: 460px) {
+  .container-main {
+    background-color: #f2f2f2;
+    padding: 5px 30px 15px 30px;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+  }
+  .container {
+    background-color: #f2f2f2;
+    padding: 5px 30px 15px 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 @media (max-width: 800px) {
   .row {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .col-25 {
     margin-bottom: 20px;

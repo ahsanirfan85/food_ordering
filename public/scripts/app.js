@@ -20,7 +20,7 @@ $(document).ready(function () {
     <div class="right-col">
       <div class="name-price">
         <div class="price">$<span>${item.price / 100}</span></div>
-        <div class="click_me">
+        <div class="">
 
           <div class="btn-qty">
             <button class="add_quantity mr-3 btn">+</button>
