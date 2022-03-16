@@ -148,6 +148,17 @@
   font-weight: bold;
 }
 
+// Order Confirmation after checking out the order
+#order-confirmation {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-form {
+  display: flex;
+  font-size: 5rem;
+}
+
 // mobile responsive
 @media only screen and (min-width: 768px) {
 }

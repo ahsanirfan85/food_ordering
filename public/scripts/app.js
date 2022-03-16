@@ -206,13 +206,50 @@ $(document).ready(function () {
 
       // display order confirmation on the page
       $("body").append(`
-      <div id="order-confirmation">
-        <div>${data.order_details.name}! Your order has been sent!</div>
-        <div>
-        </div>
-        <button id="order-again">Order Again</button>
-        <a href="/${data.order_details.id}">Click here to track your order!</a>
-      <div>
+      <div id="order-confirmation" style="display:flex; justify-content:center">
+
+  <div 
+  style="
+  text-align:center;
+  font-size:1.5rem;
+  width:50%;
+  height:20vh;
+  padding: 4rem 3rem;
+  border: 1px solid #dadada;
+  border-radius: 15px;
+  margin-bottom: 5rem;">
+
+    <div style="margin-bottom: 1.2rem;">${data.order_details.name}! Your order has been sent!</div>
+
+    <div style="display: flex; flex-direction: row; ">
+  <button id="order-again" 
+  style="
+  background-color: #04aa6d;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+  margin: 5px 5px;">Order Again</button>
+
+    <a href="/${data.order_details.id}" style="background-color: #04aa6d;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+  text-decoration: none;
+  margin: 5px 5px;">Click here to track your order!</a>
+    </div>
+  </div>
+
+</div>
     `);
       //$.post("/api/send_sms"); // send an SMS to the restaurant owner and the person who ordered
     });
