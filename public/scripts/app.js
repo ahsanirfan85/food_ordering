@@ -2,24 +2,21 @@ $(document).ready(function () {
   // This function creates the HTML snippet for each menu item.
   const createMenuItem = function (item) {
     return `
-      <div class="menu-wrapper">
-        <div class="menu-items">
-          <img class="menu-size" src="${item.photo_url}" alt="image">
-          <div class="name-desc">
-            <div class="name">${item.name}</div>
-            <div class="description">${item.description}</div>
-          </div>
-        <div class="name-price">
+    <div class="menu-wrapper">
+    <div>
+      <div class="name-price">
+        <div class="name">${item.name}</div>
         <div class="price">$<span>${Number(item.price / 100).toFixed(2)}</span></div>
-        <div class="display-flex align-items-center">
-          <div class="btn-qty">
-            <button class="add_quantity mr-3 btn">+</button>
-            <div class="mt-3 mr-3" id="${item.id}">0</div>
-            <button class="red_quantity mr-3 btn">-</button>
-          </div>
-          <button class="click_me mr-3 btn">Add to Order</button>
-        </div>
       </div>
+      <div class="description">${item.description}</div>
+      <div class="display-flex align-items-center">
+        <button class="click_me mr-3">Add to Order</button>
+        <button class="add_quantity mr-3">+</button>
+        <div class="mt-3 mr-3" id="${item.id}">0</div>
+        <button class="red_quantity">-</button>
+      </div>
+    </div>
+  </div>
   `;};
 
   let quantities = []; // This array is to store the quantities of each menu item selected by the user.
