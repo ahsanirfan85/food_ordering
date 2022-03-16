@@ -1,5 +1,5 @@
-// Client facing scripts here
 $(document).ready(function () {
+  //
   const createMenuItem = function (item) {
     return `
     <div class="menu-wrapper">
@@ -24,8 +24,7 @@ $(document).ready(function () {
         </div>
       </div>
     </div>
-  </div>
-</div>
+
 
 
       `;
