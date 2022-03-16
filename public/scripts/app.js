@@ -3,20 +3,20 @@ $(document).ready(function () {
   const createMenuItem = function (item) {
     return `
     <div class="menu-wrapper">
-      <div>
-        <div class="name-price">
-          <div class="name">${item.name}</div>
-          <div class="price">$<span>BlahBlah${Number(item.price / 100).toFixed(2)}</span></div>
-        </div>
-        <div class="description">${item.description}</div>
-        <div class="display-flex align-items-center">
-          <button class="click_me mr-3">Add to Order</button>
-          <button class="add_quantity mr-3">+</button>
-          <div class="mt-3 mr-3" id="${item.id}">0</div>
-          <button class="red_quantity">-</button>
-        </div>
+    <div>
+      <div class="name-price">
+        <div class="name">${item.name}</div>
+        <div class="price">$<span>${Number(item.price / 100).toFixed(2)}</span></div>
+      </div>
+      <div class="description">${item.description}</div>
+      <div class="display-flex align-items-center">
+        <button class="click_me mr-3">Add to Order</button>
+        <button class="add_quantity mr-3">+</button>
+        <div class="mt-3 mr-3" id="${item.id}">0</div>
+        <button class="red_quantity">-</button>
       </div>
     </div>
+  </div>
   `;};
 
   let quantities = []; // This array is to store the quantities of each menu item selected by the user.
