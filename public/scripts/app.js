@@ -6,7 +6,7 @@ $(document).ready(function () {
       <div>
         <div class="name-price">
           <div class="name">${item.name}</div>
-          <div class="price">$<span>${Number(item.price / 100).toFixed(2)}</span></div>
+          <div class="price">$<span>BlahBlah${Number(item.price / 100).toFixed(2)}</span></div>
         </div>
         <div class="description">${item.description}</div>
         <div class="display-flex align-items-center">
