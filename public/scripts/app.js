@@ -163,18 +163,16 @@ $(document).ready(function () {
           console.log(data);
         });
       }
+      $("#order_summary").remove();
+      $("#display-menu").remove();
       $("#ready-to-pay-button").remove();
       $("#form-area").remove();
       $("body").append(`
-      <div class="order-confirmation">
+      <div id="order-confirmation">
         <div>${data.order_details.name}! Your order has been sent!</div>
-        <br>
         <div>
-
         </div>
         <button id="order-again">Order Again</button>
-        <br>
-        <br>
         <a href="/${data.order_details.id}">Click here to track your order!</a>
       <div>
     `);
