@@ -89,13 +89,15 @@ app.get("/api/orders/:id", (req, res) => {
 
 // Route to allow restaurant owner to update the order status via text message
 app.post('/sms', (req, res) => {
-  console.log("Message received!");
+  const message = req.body.Body;
+  const orderNumber = Number(message.substr(0,message.indexOf(':')));
+  const messageBody = (message.substr(Number(message.indexOf(':')) + 2));
   db.query(`
     UPDATE orders
-    SET status = 'unknown'
-    WHERE id = 76
+    SET status = $1
+    WHERE id = $2
     RETURNING *
-  ;`)
+  ;`, [messageBody, orderNumber])
   .then(data => {
     const order = data.rows;
     res.json({  order  });
