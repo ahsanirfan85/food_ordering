@@ -208,7 +208,7 @@ $(document).ready(function () {
       $("body").append(`
       <div id="order-confirmation" style="display:flex; justify-content:center">
 
-  <div 
+  <div
   style="
   text-align:center;
   font-size:1.5rem;
@@ -222,7 +222,7 @@ $(document).ready(function () {
     <div style="margin-bottom: 1.2rem;">${data.order_details.name}! Your order has been sent!</div>
 
     <div style="display: flex; flex-direction: row; ">
-  <button id="order-again" 
+  <button id="order-again"
   style="
   background-color: #04aa6d;
   color: white;
@@ -251,7 +251,7 @@ $(document).ready(function () {
 
 </div>
     `);
-      //$.post("/api/send_sms"); // send an SMS to the restaurant owner and the person who ordered
+      $.post("/api/send_sms"); // send an SMS to the restaurant owner and the person who ordered
     });
   });
 
