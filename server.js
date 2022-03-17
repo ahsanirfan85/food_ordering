@@ -47,8 +47,8 @@ const orderItemsRoutes = require("./routes/order_items");
 app.use("/api/order_items", orderItemsRoutes(db));
 
 // requires the routing to send confirmation text messages to both the restaurant owner and the person who put in the order
-// const sendSmsRoutes = require("./routes/send_sms");  // Comment or uncomment this as necessary
-// app.use("/api/send_sms", sendSmsRoutes(db)); // Comment or uncomment this as necessary
+const sendSmsRoutes = require("./routes/send_sms");  // Comment or uncomment this as necessary
+app.use("/api/send_sms", sendSmsRoutes(db)); // Comment or uncomment this as necessary
 
 // Route to render the home page
 app.get("/", (req, res) => {
