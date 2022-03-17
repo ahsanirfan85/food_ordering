@@ -12,6 +12,7 @@ const client = require("twilio")(accountSid, authToken);
 
 module.exports = () => {
   router.post("/", (req, res) => {
+    console.log(req.body.phone);
     client.messages
       .create({
         body: "New order received!",
@@ -23,7 +24,7 @@ module.exports = () => {
       .create({
         body: "Your order has been confirmed!",
         from: "+12896701859",
-        to: "+15879992749",
+        to: req.body.phone,
       })
       .then((message) => console.log(message.sid));
   });

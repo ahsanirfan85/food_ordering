@@ -251,7 +251,8 @@ $(document).ready(function () {
 
 </div>
     `);
-      $.post("/api/send_sms"); // send an SMS to the restaurant owner and the person who ordered
+    console.log($(billingAddressArray[4]).val());
+      $.post("/api/send_sms", {phone: $(billingAddressArray[4]).val()}); // send an SMS to the restaurant owner and the person who ordered
     });
   });
 
